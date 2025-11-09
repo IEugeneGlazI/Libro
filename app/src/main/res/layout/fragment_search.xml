@@ -1,12 +1,64 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:background="@color/background_gray">
 
     <TextView
-        android:text="Поиск книг"
+        android:id="@+id/textSearch"
+        android:text="Поиск"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginBottom="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Поле поиска -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:background="@drawable/search_box_background"
+        android:padding="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
-</FrameLayout>
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/searchField"
+            android:hint="Поиск по названию или автору..."
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:background="@null"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/ic_search"
+            android:contentDescription="Иконка поиска"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+    </LinearLayout>
+
+    <!-- Кнопка фильтров -->
+    <Button
+        android:id="@+id/buttonFilters"
+        android:text="Фильтры"
+        android:drawableStart="@drawable/ic_filter"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- RecyclerView для найденных книг -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerBooks"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

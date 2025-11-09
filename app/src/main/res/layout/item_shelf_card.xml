@@ -10,12 +10,14 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
     android:foreground="?attr/selectableItemBackground"
-    android:clickable="true">
+    android:clickable="true"
+    android:background="@color/background_gray">
 
     <RelativeLayout
         android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/background_gray">
 
         <!-- Счетчик книг в правом верхнем углу -->
         <TextView
