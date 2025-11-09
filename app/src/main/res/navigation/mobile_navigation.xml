@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_library">
+
+    <fragment
+        android:id="@+id/navigation_library"
+        android:name="com.example.libro.ui.library.LibraryFragment"
+        android:label="Моя библиотека"
+        tools:layout="@layout/fragment_library" />
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.libro.ui.search.SearchFragment"
+        android:label="Поиск"
+        tools:layout="@layout/fragment_search" />
+
+    <fragment
+        android:id="@+id/navigation_achievements"
+        android:name="com.example.libro.ui.achievements.AchievementsFragment"
+        android:label="Достижения"
+        tools:layout="@layout/fragment_achievements" />
+
+    <fragment
+        android:id="@+id/navigation_stats"
+        android:name="com.example.libro.ui.stats.StatsFragment"
+        android:label="Статистика"
+        tools:layout="@layout/fragment_stats" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.libro.ui.profile.ProfileFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
