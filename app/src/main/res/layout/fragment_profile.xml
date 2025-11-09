@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Профиль"
         android:textColor="@color/black"
-        android:textSize="22sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:layout_marginBottom="12dp" />
 
@@ -55,9 +55,9 @@
 
                     <ImageView
                         android:id="@+id/profileImage"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/ic_profile" />
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_my_profile" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -233,8 +233,6 @@
                         android:focusable="false"
                         android:scaleX="1.2"
                         android:scaleY="1.2"
-                        android:thumbTint="@color/purple_700"
-                        android:trackTint="@color/purple_200"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -284,8 +282,6 @@
                         android:focusable="false"
                         android:scaleX="1.2"
                         android:scaleY="1.2"
-                        android:thumbTint="@color/purple_700"
-                        android:trackTint="@color/purple_200"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -649,10 +645,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/settings_item_background_top"
+                            android:background="@drawable/settings_delete_item_bacground_top"
                             android:padding="12dp"
                             android:text="Опасная зона"
-                            android:textColor="@color/black"
+                            android:textColor="@color/danger_red"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -661,7 +657,7 @@
                             android:id="@+id/buttonDeleteAllData"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/settings_item_background_bottom"
+                            android:background="@drawable/settings_delete_item_bacground_bottom"
                             android:clickable="true"
                             android:focusable="true"
                             android:padding="12dp">
@@ -681,7 +677,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Удалить все данные"
-                                android:textColor="@color/black"
+                                android:textColor="@color/danger_red"
                                 android:textSize="16sp"
                                 android:layout_marginLeft="6dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -693,7 +689,7 @@
                                 android:id="@+id/arrowDeleteAllData"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_arrow"
+                                android:src="@drawable/ic_delete_arrow"
                                 android:background="?android:attr/selectableItemBackgroundBorderless"
                                 android:contentDescription="Экспорт"
                                 app:layout_constraintBottom_toBottomOf="parent"
