@@ -79,6 +79,13 @@ class BookDetailsActivity : AppCompatActivity() {
     private fun deleteBook() {
         val books = JsonHelper.loadBooks(this)
         if (bookIndex >= 0 && bookIndex < books.size) {
+            val bookToDelete = books[bookIndex]
+            // Удаляем изображение книги, если оно локальное
+            bookToDelete.coverUrl?.let { coverUrl ->
+                if (com.example.libro.data.ImageHelper.isLocalFile(coverUrl)) {
+                    com.example.libro.data.ImageHelper.deleteImageFile(this, coverUrl)
+                }
+            }
             books.removeAt(bookIndex)
             JsonHelper.saveBooks(this, books)
             dataHasChanged = true

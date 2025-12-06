@@ -104,7 +104,19 @@ class AddBookActivity : AppCompatActivity() {
             .map { (it as Chip).text.toString() }
             .toList()
 
-        val coverUrl = selectedImageUri?.toString() ?: remoteCoverUrl
+        // Сохраняем изображение в постоянное хранилище, если оно выбрано пользователем
+        val imageUri = selectedImageUri
+        val coverUrl = if (imageUri != null) {
+            // Копируем изображение в хранилище приложения
+            com.example.libro.data.ImageHelper.saveImageToInternalStorage(
+                this, 
+                imageUri, 
+                System.currentTimeMillis().toString()
+            ) ?: imageUri.toString()
+        } else {
+            remoteCoverUrl
+        }
+        
         val shelfName = intent.getStringExtra("SHELF_NAME")
         val shelfNumber = binding.inputShelfNumber.text.toString().takeIf { it.isNotBlank() }
         val placeNumber = binding.inputPlaceNumber.text.toString().takeIf { it.isNotBlank() }

@@ -106,7 +106,25 @@ class EditBookActivity : AppCompatActivity() {
             .map { (it as Chip).text.toString() }
             .toList()
 
-        val coverUrl = selectedImageUri?.toString() ?: currentBook?.coverUrl
+        // Сохраняем изображение в постоянное хранилище, если выбрано новое
+        val imageUri = selectedImageUri
+        val coverUrl = if (imageUri != null) {
+            // Удаляем старое изображение, если оно было локальным файлом
+            currentBook?.coverUrl?.let { oldUrl ->
+                if (com.example.libro.data.ImageHelper.isLocalFile(oldUrl)) {
+                    com.example.libro.data.ImageHelper.deleteImageFile(this, oldUrl)
+                }
+            }
+            // Копируем новое изображение в хранилище приложения
+            com.example.libro.data.ImageHelper.saveImageToInternalStorage(
+                this,
+                imageUri,
+                currentBook?.title?.hashCode().toString()
+            ) ?: imageUri.toString()
+        } else {
+            currentBook?.coverUrl
+        }
+        
         val shelfNumber = binding.inputShelfNumber.text.toString().takeIf { it.isNotBlank() }
         val placeNumber = binding.inputPlaceNumber.text.toString().takeIf { it.isNotBlank() }
 

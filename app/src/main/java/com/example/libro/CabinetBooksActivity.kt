@@ -55,6 +55,8 @@ class CabinetBooksActivity : AppCompatActivity() {
         shelfName = intent.getStringExtra("SHELF_NAME") ?: "Шкаф"
         binding.toolbar.title = shelfName
         binding.cabinetName.text = shelfName
+        
+        updateShelfIcon()
 
         loadBooks()
 
@@ -70,6 +72,15 @@ class CabinetBooksActivity : AppCompatActivity() {
         super.onResume()
         loadBooks()
         updateShelfBooksCount()
+        updateShelfIcon()
+    }
+    
+    private fun updateShelfIcon() {
+        val shelves = JsonHelper.loadShelves(this)
+        val shelf = shelves.find { it.name == shelfName }
+        val iconName = shelf?.iconName ?: "ic_shelf_books"
+        val iconId = resources.getIdentifier(iconName, "drawable", packageName)
+        binding.cabinetIcon.setImageResource(if (iconId != 0) iconId else R.drawable.ic_shelf_books)
     }
 
     private fun setupToolbar() {
