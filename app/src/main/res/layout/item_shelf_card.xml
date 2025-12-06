@@ -19,23 +19,6 @@
         android:layout_height="wrap_content"
         android:background="@color/background_gray">
 
-        <!-- Счетчик книг в правом верхнем углу -->
-        <TextView
-            android:id="@+id/textShelfBooksCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:text="1 книга"
-            android:textSize="12sp"
-            android:textStyle="normal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:background="@drawable/books_count_background"
-            android:textColor="@color/black" />
-
         <!-- Иконка шкафа (большая, над названием) -->
         <ImageView
             android:id="@+id/iconShelf"
@@ -46,6 +29,38 @@
             android:layout_marginBottom="12dp"
             android:src="@drawable/ic_books"
             android:contentDescription="Иконка шкафа" />
+
+        <!-- Троеточие (опции) в правом верхнем углу -->
+        <ImageButton
+            android:id="@+id/btn_shelf_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_more_vert"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Опции" />
+
+        <!-- Счетчик книг слева от троеточия -->
+        <TextView
+            android:id="@+id/textShelfBooksCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/btn_shelf_options"
+            android:layout_alignTop="@id/btn_shelf_options"
+            android:layout_alignBottom="@id/btn_shelf_options"
+            android:layout_marginEnd="8dp"
+            android:gravity="center_vertical"
+            android:text="1 книга"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/books_count_background"
+            android:textColor="@color/black" />
 
         <!-- Название шкафа (под иконкой) -->
         <TextView
@@ -99,18 +114,6 @@
             android:layout_marginTop="4dp"
             android:text="Коллекция художественной литературы"
             android:textSize="14sp" />
-
-        <ImageButton
-            android:id="@+id/btn_shelf_options"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_more_vert"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="Опции" />
 
     </RelativeLayout>
 

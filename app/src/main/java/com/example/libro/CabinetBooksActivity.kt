@@ -3,9 +3,11 @@ package com.example.libro
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.libro.R
 import com.example.libro.data.JsonHelper
 import com.example.libro.databinding.ActivityCabinetBooksBinding
 
@@ -14,13 +16,32 @@ class CabinetBooksActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCabinetBooksBinding
     private var bookList = mutableListOf<Book>()
     private lateinit var bookAdapter: BookAdapter
+    private var emptyStateView: View? = null
 
     private val activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             loadBooks()
+            updateShelfBooksCount()
+        }
+    }
+    
+    private fun updateShelfBooksCount() {
+        val allBooks = JsonHelper.loadBooks(this)
+        val booksInShelf = allBooks.count { it.shelfName == shelfName }
+        
+        // Обновляем счетчик в полке
+        val shelves = JsonHelper.loadShelves(this)
+        val shelfIndex = shelves.indexOfFirst { it.name == shelfName }
+        if (shelfIndex != -1) {
+            val shelf = shelves[shelfIndex]
+            val updatedShelf = shelf.copy(booksCount = booksInShelf)
+            shelves[shelfIndex] = updatedShelf
+            JsonHelper.saveShelves(this, shelves)
         }
     }
 
+    private var shelfName: String = "Шкаф"
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCabinetBooksBinding.inflate(layoutInflater)
@@ -28,17 +49,27 @@ class CabinetBooksActivity : AppCompatActivity() {
 
         setupToolbar()
         setupRecyclerView()
+        
+        emptyStateView = binding.root.findViewById(R.id.empty_state)
 
-        val shelfName = intent.getStringExtra("SHELF_NAME") ?: "Шкаф"
+        shelfName = intent.getStringExtra("SHELF_NAME") ?: "Шкаф"
         binding.toolbar.title = shelfName
         binding.cabinetName.text = shelfName
 
         loadBooks()
 
         binding.fabAddBook.setOnClickListener {
-            val intent = Intent(this, AddBookActivity::class.java)
+            val intent = Intent(this, AddBookActivity::class.java).apply {
+                putExtra("SHELF_NAME", shelfName)
+            }
             activityLauncher.launch(intent)
         }
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        loadBooks()
+        updateShelfBooksCount()
     }
 
     private fun setupToolbar() {
@@ -49,38 +80,24 @@ class CabinetBooksActivity : AppCompatActivity() {
     }
 
     private fun loadBooks() {
-        bookList = JsonHelper.loadBooks(this)
-        if (bookList.isEmpty()) {
-            bookList.addAll(getInitialBooks())
-            JsonHelper.saveBooks(this, bookList)
-        }
+        val allBooks = JsonHelper.loadBooks(this)
+        // Фильтруем книги по названию полки
+        bookList = allBooks.filter { it.shelfName == shelfName }.toMutableList()
         bookAdapter.updateBooks(bookList)
         updateBookCount()
+        updateEmptyState()
     }
 
-    private fun getInitialBooks(): List<Book> {
-        return listOf(
-            Book(
-                title = "Война и мир",
-                author = "Лев Толстой",
-                year = 1869,
-                tags = listOf("Классика", "Роман"),
-                status = "Прочитана",
-                rating = 5,
-                commentCount = 2,
-                bookmarkCount = 5
-            ),
-            Book(
-                title = "Преступление и наказание",
-                author = "Фёдор Достоевский",
-                year = 1866,
-                tags = listOf("Классика"),
-                status = "Читаю",
-                rating = 4,
-                commentCount = 2,
-                bookmarkCount = 6
-            )
-        )
+    private fun updateEmptyState() {
+        emptyStateView?.let { emptyView ->
+            if (bookList.isEmpty()) {
+                binding.recyclerBooks.visibility = View.GONE
+                emptyView.visibility = View.VISIBLE
+            } else {
+                binding.recyclerBooks.visibility = View.VISIBLE
+                emptyView.visibility = View.GONE
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -97,6 +114,14 @@ class CabinetBooksActivity : AppCompatActivity() {
     }
 
     private fun updateBookCount() {
-        binding.cabinetCount.text = "${bookList.size} книг"
+        binding.cabinetCount.text = formatBookCount(bookList.size)
+    }
+    
+    private fun formatBookCount(count: Int): String {
+        return when {
+            count % 10 == 1 && count % 100 != 11 -> "$count книга"
+            count % 10 in 2..4 && count % 100 !in 12..14 -> "$count книги"
+            else -> "$count книг"
+        }
     }
 }

@@ -127,8 +127,19 @@ class BookDetailsActivity : AppCompatActivity() {
         binding.bookAuthor.text = book.author
         binding.bookPublisher.text = "Издательство: ${book.publisher}"
         binding.bookDescription.text = book.description
-        binding.shelfName.text = intent.getStringExtra("SHELF_NAME") ?: "Гостиная"
-        binding.shelfPosition.text = book.shelfPosition
+        // Используем расположение (позицию) шкафа из книги
+        binding.shelfName.text = book.shelfLocation ?: "Не указано"
+        // Формируем строку позиции из номера полки и места
+        val positionText = when {
+            !book.shelfNumber.isNullOrBlank() && !book.placeNumber.isNullOrBlank() -> 
+                "Полка: ${book.shelfNumber}  Место: ${book.placeNumber}"
+            !book.shelfNumber.isNullOrBlank() -> 
+                "Полка: ${book.shelfNumber}"
+            !book.placeNumber.isNullOrBlank() -> 
+                "Место: ${book.placeNumber}"
+            else -> book.shelfPosition ?: "Не указано"
+        }
+        binding.shelfPosition.text = positionText
         binding.isbnText.text = book.isbn
 
         binding.ratingBar.removeAllViews()

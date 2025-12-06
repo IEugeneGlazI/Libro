@@ -30,7 +30,7 @@ class ShelfAdapter(
             textShelfName.text = shelf.name
             textShelfLocation.text = shelf.location
             textShelfDescription.text = shelf.description
-            textShelfBooksCount.text = "${shelf.booksCount} книг"
+            textShelfBooksCount.text = formatBookCount(shelf.booksCount)
 
             val context = holder.itemView.context
             val iconId = context.resources.getIdentifier(shelf.iconName, "drawable", context.packageName)
@@ -66,5 +66,13 @@ class ShelfAdapter(
     fun updateShelves(newShelves: MutableList<Shelf>) {
         this.shelves = newShelves
         notifyDataSetChanged()
+    }
+    
+    private fun formatBookCount(count: Int): String {
+        return when {
+            count % 10 == 1 && count % 100 != 11 -> "$count книга"
+            count % 10 in 2..4 && count % 100 !in 12..14 -> "$count книги"
+            else -> "$count книг"
+        }
     }
 }

@@ -75,6 +75,8 @@ class EditBookActivity : AppCompatActivity() {
         binding.inputDescription.setText(book.description)
         binding.inputIsbn.setText(book.isbn)
         binding.ratingBar.rating = book.rating.toFloat()
+        binding.inputShelfNumber.setText(book.shelfNumber)
+        binding.inputPlaceNumber.setText(book.placeNumber)
 
         // Load cover image
         if (!book.coverUrl.isNullOrEmpty()) {
@@ -105,6 +107,8 @@ class EditBookActivity : AppCompatActivity() {
             .toList()
 
         val coverUrl = selectedImageUri?.toString() ?: currentBook?.coverUrl
+        val shelfNumber = binding.inputShelfNumber.text.toString().takeIf { it.isNotBlank() }
+        val placeNumber = binding.inputPlaceNumber.text.toString().takeIf { it.isNotBlank() }
 
         val updatedBook = currentBook!!.copy(
             title = title,
@@ -115,7 +119,9 @@ class EditBookActivity : AppCompatActivity() {
             isbn = binding.inputIsbn.text.toString(),
             tags = selectedGenres,
             rating = binding.ratingBar.rating.toInt(),
-            coverUrl = coverUrl
+            coverUrl = coverUrl,
+            shelfNumber = shelfNumber,
+            placeNumber = placeNumber
         )
 
         val books = JsonHelper.loadBooks(this)

@@ -105,6 +105,15 @@ class AddBookActivity : AppCompatActivity() {
             .toList()
 
         val coverUrl = selectedImageUri?.toString() ?: remoteCoverUrl
+        val shelfName = intent.getStringExtra("SHELF_NAME")
+        val shelfNumber = binding.inputShelfNumber.text.toString().takeIf { it.isNotBlank() }
+        val placeNumber = binding.inputPlaceNumber.text.toString().takeIf { it.isNotBlank() }
+        
+        // Получаем location шкафа по его названию
+        val shelfLocation = shelfName?.let { name ->
+            val shelves = JsonHelper.loadShelves(this)
+            shelves.find { it.name == name }?.location
+        }
 
         val newBook = Book(
             title = title,
@@ -118,7 +127,11 @@ class AddBookActivity : AppCompatActivity() {
             rating = 0,
             commentCount = 0,
             bookmarkCount = 0,
-            coverUrl = coverUrl
+            coverUrl = coverUrl,
+            shelfName = shelfName,
+            shelfLocation = shelfLocation,
+            shelfNumber = shelfNumber,
+            placeNumber = placeNumber
         )
 
         val books = JsonHelper.loadBooks(this)

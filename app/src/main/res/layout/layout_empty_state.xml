@@ -34,11 +34,4 @@
         android:gravity="center"
         tools:text="Здесь пока нет книг. Нажмите 'Добавить книгу' или отсканируйте ISBN." />
 
-    <Button
-        android:id="@+id/btn_empty_action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Добавить книгу" />
-
 </LinearLayout>

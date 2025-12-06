@@ -49,9 +49,21 @@ class LibraryFragment : Fragment() {
             shelfActivityLauncher.launch(intent)
         }
     }
+    
+    override fun onResume() {
+        super.onResume()
+        loadShelves()
+    }
 
     private fun loadShelves() {
         shelfList = JsonHelper.loadShelves(requireContext())
+        // Пересчитываем количество книг для каждой полки
+        val allBooks = JsonHelper.loadBooks(requireContext())
+        shelfList = shelfList.map { shelf ->
+            val booksCount = allBooks.count { it.shelfName == shelf.name }
+            shelf.copy(booksCount = booksCount)
+        }.toMutableList()
+        JsonHelper.saveShelves(requireContext(), shelfList)
         shelfAdapter.updateShelves(shelfList)
     }
 

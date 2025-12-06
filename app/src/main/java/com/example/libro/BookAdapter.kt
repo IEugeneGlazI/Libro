@@ -27,8 +27,9 @@ class BookAdapter(
             bookAuthor.text = book.author
             bookYear.text = book.year.toString()
             bookStatus.text = book.status
-            commentCount.text = book.commentCount.toString()
-            bookmarkCount.text = book.bookmarkCount.toString()
+            // Отображаем номер полки и место вместо счетчиков комментариев и закладок
+            commentCount.text = book.shelfNumber ?: "-"
+            bookmarkCount.text = book.placeNumber ?: "-"
 
             // Load cover image
             if (!book.coverUrl.isNullOrEmpty()) {
