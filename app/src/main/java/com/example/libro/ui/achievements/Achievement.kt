@@ -27,7 +27,7 @@ enum class AchievementType(
         "Первый читатель",
         "Прочитайте первую книгу",
         1,
-        R.drawable.ic_star,
+        R.drawable.ic_cup,
         R.color.achievement_first_reader,
         R.color.achievement_first_reader_light
     ),
@@ -35,7 +35,7 @@ enum class AchievementType(
         "Марафонец",
         "Прочитайте 5 книг",
         5,
-        R.drawable.ic_cup,
+        R.drawable.ic_fire,
         R.color.achievement_marathon_runner,
         R.color.achievement_marathon_runner_light
     ),
@@ -51,7 +51,7 @@ enum class AchievementType(
         "Мастер чтения",
         "Прочитайте 25 книг",
         25,
-        R.drawable.ic_books,
+        R.drawable.ic_graduation_cap,
         R.color.achievement_reading_master,
         R.color.achievement_reading_master_light
     ),
@@ -67,7 +67,7 @@ enum class AchievementType(
         "Исследователь",
         "Прочитайте книги из 3 разных жанров",
         3,
-        R.drawable.ic_genre,
+        R.drawable.ic_search,
         R.color.achievement_explorer,
         R.color.achievement_explorer_light
     ),
