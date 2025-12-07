@@ -15,4 +15,5 @@
     <color name="status_read">#dbfce7</color>
     <color name="status_not_started">#f3f3f5</color>
     <color name="status_postponed">#fef9c2</color>
+    <color name="yellow_500">#d08700</color>
 </resources>

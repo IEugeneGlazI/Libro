@@ -69,7 +69,7 @@ class StatsFragment : Fragment() {
         updateShelvesDistribution(books, shelves)
 
         // Обновляем прогресс чтения
-        updateReadingProgress(readBooks, readingBooks, plannedBooks, totalBooks)
+        updateReadingProgress(readBooks, readingBooks, postponedBooks, plannedBooks, totalBooks)
     }
     
     private fun updateAverageRating(books: List<com.example.libro.Book>) {
@@ -188,14 +188,16 @@ class StatsFragment : Fragment() {
         }
     }
 
-    private fun updateReadingProgress(read: Int, reading: Int, planned: Int, total: Int) {
+    private fun updateReadingProgress(read: Int, reading: Int, postponed: Int, planned: Int, total: Int) {
         if (total == 0) {
             binding.progressText.text = "0% завершено"
             binding.progressCircle.readPercent = 0f
             binding.progressCircle.readingPercent = 0f
+            binding.progressCircle.postponedPercent = 0f
             binding.progressCircle.plannedPercent = 0f
             binding.legendRead.text = "Прочитано: 0"
             binding.legendReading.text = "Читаю: 0"
+            binding.legendPostponed.text = "Отложено: 0"
             binding.legendPlanned.text = "В планах: 0"
             return
         }
@@ -203,6 +205,7 @@ class StatsFragment : Fragment() {
         // Вычисляем проценты для каждого статуса
         val readPercent = (read * 100f) / total
         val readingPercent = (reading * 100f) / total
+        val postponedPercent = (postponed * 100f) / total
         val plannedPercent = (planned * 100f) / total
 
         // Вычисляем процент завершенных (прочитанных)
@@ -212,11 +215,13 @@ class StatsFragment : Fragment() {
         // Обновляем круговой график
         binding.progressCircle.readPercent = readPercent
         binding.progressCircle.readingPercent = readingPercent
+        binding.progressCircle.postponedPercent = postponedPercent
         binding.progressCircle.plannedPercent = plannedPercent
 
         // Обновляем легенду
         binding.legendRead.text = "Прочитано: $read"
         binding.legendReading.text = "Читаю: $reading"
+        binding.legendPostponed.text = "Отложено: $postponed"
         binding.legendPlanned.text = "В планах: $planned"
     }
 

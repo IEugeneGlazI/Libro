@@ -46,6 +46,12 @@ class CircularProgressView @JvmOverloads constructor(
             field = value.coerceIn(0f, 100f)
             invalidate()
         }
+    
+    var postponedPercent: Float = 0f
+        set(value) {
+            field = value.coerceIn(0f, 100f)
+            invalidate()
+        }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -83,6 +89,14 @@ class CircularProgressView @JvmOverloads constructor(
             startAngle += sweepAngle
         }
         
+        // Отложено (желтый)
+        if (postponedPercent > 0) {
+            paint.color = ContextCompat.getColor(context, R.color.yellow_500)
+            val sweepAngle = 360f * postponedPercent / 100f
+            canvas.drawArc(rectF, startAngle, sweepAngle, false, paint)
+            startAngle += sweepAngle
+        }
+        
         // В планах (серый)
         if (plannedPercent > 0) {
             paint.color = ContextCompat.getColor(context, android.R.color.darker_gray)
@@ -91,4 +105,5 @@ class CircularProgressView @JvmOverloads constructor(
         }
     }
 }
+
 
