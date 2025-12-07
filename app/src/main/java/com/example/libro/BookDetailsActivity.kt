@@ -158,12 +158,12 @@ class BookDetailsActivity : AppCompatActivity() {
             binding.ratingBar.addView(star)
         }
 
-        // Unset listener before setting checked state
-        binding.statusChipGroup.setOnCheckedStateChangeListener(null)
-        for (i in 0 until binding.statusChipGroup.childCount) {
-            val chip = binding.statusChipGroup.getChildAt(i) as Chip
-            chip.isChecked = chip.text.toString().equals(book.status, ignoreCase = true)
-        }
+        // Устанавливаем выбранный статус
+        binding.statusNotStarted.isChecked = book.status.equals("Не начата", ignoreCase = true)
+        binding.statusReading.isChecked = book.status.equals("Читаю", ignoreCase = true)
+        binding.statusRead.isChecked = book.status.equals("Прочитана", ignoreCase = true)
+        binding.statusPostponed.isChecked = book.status.equals("Отложена", ignoreCase = true)
+        
         // Re-set listener
         setupStatusListener()
 
@@ -189,12 +189,24 @@ class BookDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupStatusListener() {
-        binding.statusChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            if (checkedIds.isNotEmpty()) {
-                val checkedId = checkedIds.first()
-                val chip: Chip? = group.findViewById(checkedId)
-                chip?.let { 
-                    val newStatus = it.text.toString()
+        val statusChips = listOf(
+            binding.statusNotStarted,
+            binding.statusReading,
+            binding.statusRead,
+            binding.statusPostponed
+        )
+        
+        statusChips.forEach { chip ->
+            chip.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    // Снимаем выделение с других чипов
+                    statusChips.forEach { otherChip ->
+                        if (otherChip != chip) {
+                            otherChip.isChecked = false
+                        }
+                    }
+                    
+                    val newStatus = chip.text.toString()
                     currentBook?.let { book ->
                         if (book.status != newStatus) {
                             val updatedBook = book.copy(status = newStatus)

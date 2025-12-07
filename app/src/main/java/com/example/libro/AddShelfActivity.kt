@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class AddShelfActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddShelfBinding
-    private var selectedIconName: String = "ic_shelf_books"
+    private var selectedIconName: String = "ic_book"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +86,7 @@ class AddShelfActivity : AppCompatActivity() {
 
     private fun getAvailableIcons(): List<IconSelectorAdapter.IconItem> {
         return listOf(
-            IconSelectorAdapter.IconItem("ic_shelf_books", R.drawable.ic_shelf_books),
+            IconSelectorAdapter.IconItem("ic_sword", R.drawable.ic_sword),
             IconSelectorAdapter.IconItem("ic_moon", R.drawable.ic_moon),
             IconSelectorAdapter.IconItem("ic_brain", R.drawable.ic_brain),
             IconSelectorAdapter.IconItem("ic_briefcase", R.drawable.ic_briefcase),

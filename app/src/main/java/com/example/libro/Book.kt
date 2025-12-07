@@ -16,10 +16,10 @@ data class Book(
     val commentCount: Int,
     val bookmarkCount: Int,
     val coverUrl: String? = null, // пока может быть null
-    val publisher: String? = "АСТ", // Добавим недостающие поля
-    val description: String? = "Роман-эпопея Льва Николаевича Толстого, описывающий русское общество в эпоху войн против Наполеона в 1805—1812 годах.",
-    val shelfPosition: String? = "Полка: 2  Место: 5",
-    val isbn: String? = "978-5-17-098765-4",
+    val publisher: String? = null, // Добавим недостающие поля
+    val description: String? = null,
+    val shelfPosition: String? = "Не указано",
+    val isbn: String? = null,
     val shelfName: String? = null, // Название полки, к которой принадлежит книга
     val shelfLocation: String? = null, // Расположение (позиция) шкафа, к которой принадлежит книга
     val shelfNumber: String? = null, // Номер полки

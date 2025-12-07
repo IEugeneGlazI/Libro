@@ -30,12 +30,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Обложка книги" />
-
             <ImageView
                 android:id="@+id/book_cover_preview"
                 android:layout_width="100dp"
@@ -55,10 +49,15 @@
 
             <!-- Form Fields -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Название *">
+                android:hint="Название *"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_title"
                     android:layout_width="match_parent"
@@ -66,10 +65,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Автор(ы)">
+                android:hint="Автор(ы)"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_author"
                     android:layout_width="match_parent"
@@ -83,10 +87,15 @@
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="Год издания">
+                    android:hint="Год издания"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_year"
                         android:layout_width="match_parent"
@@ -94,10 +103,15 @@
                 </com.google.android.material.textfield.TextInputLayout>
                 <View android:layout_width="16dp" android:layout_height="0dp"/>
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="Издательство">
+                    android:hint="Издательство"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_publisher"
                         android:layout_width="match_parent"
@@ -112,6 +126,7 @@
                 android:text="Рейтинг"/>
 
             <RatingBar
+                android:layout_marginTop="8dp"
                 android:id="@+id/rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,10 +144,15 @@
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Описание">
+                android:hint="Описание"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_description"
                     android:layout_width="match_parent"
@@ -142,10 +162,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="ISBN">
+                android:hint="ISBN"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_isbn"
                     android:layout_width="match_parent"
@@ -158,10 +183,15 @@
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="Номер полки">
+                    android:hint="Номер полки"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_shelf_number"
                         android:layout_width="match_parent"
@@ -169,10 +199,15 @@
                 </com.google.android.material.textfield.TextInputLayout>
                 <View android:layout_width="16dp" android:layout_height="0dp"/>
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:hint="Номер места">
+                    android:hint="Номер места"
+                    app:boxCornerRadiusTopStart="20dp"
+                    app:boxCornerRadiusTopEnd="20dp"
+                    app:boxCornerRadiusBottomStart="20dp"
+                    app:boxCornerRadiusBottomEnd="20dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/input_place_number"
                         android:layout_width="match_parent"
@@ -190,22 +225,24 @@
         android:padding="16dp"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cancel"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Отмена"/>
+            android:text="Отмена"
+            app:cornerRadius="20dp"/>
 
         <View android:layout_width="16dp" android:layout_height="0dp"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Сохранить"/>
+            android:text="Сохранить"
+            app:cornerRadius="20dp"/>
 
     </LinearLayout>
 
