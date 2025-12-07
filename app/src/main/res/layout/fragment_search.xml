@@ -5,54 +5,227 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/light_gray_background"
     tools:context=".ui.search.SearchFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Поиск"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="@color/black" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_input_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Поиск по названию или автору..."
-        app:startIconDrawable="@drawable/ic_search">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search_input"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <Button
-        android:id="@+id/btn_filters"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Фильтры"
-        app:icon="@drawable/ic_filter" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Поиск"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/search_results_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        tools:text="Найдено: 4 книг" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/search_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Поиск по названию или автору..."
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                app:startIconDrawable="@drawable/ic_search">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_search_results"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp"
-        tools:listitem="@layout/item_book_card" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_filters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Фильтры"
+                    app:iconSize="20dp"
+                    app:cornerRadius="20dp"
+                    app:icon="@drawable/ic_filter"
+                    app:iconGravity="textStart" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_reset_filters"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Сбросить"
+                    android:visibility="gone"
+                    app:iconSize="20dp"
+                    app:cornerRadius="20dp"
+                    app:icon="@drawable/ic_close"
+                    app:iconGravity="textStart" />
+            </LinearLayout>
+
+            <!-- Панель фильтров -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/filters_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:visibility="gone"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Жанры -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Жанры"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/genre_chip_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Расположение -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Расположение"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/location_chip_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Статус чтения -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Статус чтения"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="8dp" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/status_chip_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Год издания -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Год издания"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="От"
+                            app:boxCornerRadiusTopStart="20dp"
+                            app:boxCornerRadiusTopEnd="20dp"
+                            app:boxCornerRadiusBottomStart="20dp"
+                            app:boxCornerRadiusBottomEnd="20dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/year_from"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="—"
+                            android:textSize="18sp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="До"
+                            app:boxCornerRadiusTopStart="20dp"
+                            app:boxCornerRadiusTopEnd="20dp"
+                            app:boxCornerRadiusBottomStart="20dp"
+                            app:boxCornerRadiusBottomEnd="20dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/year_to"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/search_results_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                tools:text="Найдено: 4 книг" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_book_card"
+                android:paddingBottom="50dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
