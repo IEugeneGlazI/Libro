@@ -16,4 +16,25 @@
     <color name="status_not_started">#f3f3f5</color>
     <color name="status_postponed">#fef9c2</color>
     <color name="yellow_500">#d08700</color>
+    
+    <!-- Achievement progress colors -->
+    <color name="achievement_first_reader">#feac2e</color>
+    <color name="achievement_marathon_runner">#ff6900</color>
+    <color name="achievement_bookworm">#00bc7d</color>
+    <color name="achievement_reading_master">#ad46ff</color>
+    <color name="achievement_collector">#2b7fff</color>
+    <color name="achievement_explorer">#615fff</color>
+    <color name="achievement_rating_master">#f6339a</color>
+    <color name="achievement_fast_reader">#00b8db</color>
+    <color name="achievement_completed_border">#aea3cf</color>
+    
+    <!-- Achievement icon background colors (lighter versions) -->
+    <color name="achievement_first_reader_light">#f6e8c9</color>
+    <color name="achievement_marathon_runner_light">#f8d4d0</color>
+    <color name="achievement_bookworm_light">#c6ebe8</color>
+    <color name="achievement_reading_master_light">#f3d2ec</color>
+    <color name="achievement_collector_light">#c6e8f6</color>
+    <color name="achievement_explorer_light">#e1d7fc</color>
+    <color name="achievement_rating_master_light">#f9cddd</color>
+    <color name="achievement_fast_reader_light">#c6e7f8</color>
 </resources>

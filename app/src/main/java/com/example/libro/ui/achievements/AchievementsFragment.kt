@@ -22,14 +22,19 @@ class AchievementsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val achievements = listOf(
-            Achievement("Первый читатель", "Прочитайте первую книгу", 1, 1, true),
-            Achievement("Марафонец", "Прочитайте 5 книг", 2, 5, false),
-            Achievement("Книжный червь", "Прочитайте 10 книг", 2, 10, false),
-            Achievement("Мастер чтения", "Прочитайте 25 книг", 2, 25, false)
-        )
+        loadAchievements()
+    }
 
-        binding.textAchievementsSummary.text = "Получено: 1 из ${achievements.size}"
+    override fun onResume() {
+        super.onResume()
+        loadAchievements()
+    }
+
+    private fun loadAchievements() {
+        val achievements = AchievementCalculator.calculateAllAchievements(requireContext())
+        
+        val completedCount = achievements.count { it.isCompleted }
+        binding.textAchievementsSummary.text = "Получено: $completedCount из ${achievements.size}"
 
         val adapter = AchievementsAdapter(achievements)
         binding.recyclerAchievements.layoutManager = LinearLayoutManager(requireContext())
