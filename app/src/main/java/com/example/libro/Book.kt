@@ -15,13 +15,13 @@ data class Book(
     val rating: Int,
     val commentCount: Int,
     val bookmarkCount: Int,
-    val coverUrl: String? = null, // пока может быть null
-    val publisher: String? = null, // Добавим недостающие поля
+    val coverUrl: String? = null,
+    val publisher: String? = null,
     val description: String? = null,
     val shelfPosition: String? = "Не указано",
     val isbn: String? = null,
-    val shelfName: String? = null, // Название полки, к которой принадлежит книга
-    val shelfLocation: String? = null, // Расположение (позиция) шкафа, к которой принадлежит книга
-    val shelfNumber: String? = null, // Номер полки
-    val placeNumber: String? = null // Номер места на полке
+    val shelfName: String? = null,
+    val shelfLocation: String? = null,
+    val shelfNumber: String? = null,
+    val placeNumber: String? = null
 ) : Parcelable

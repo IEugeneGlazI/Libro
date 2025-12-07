@@ -11,5 +11,5 @@ data class Shelf(
     val location: String,
     val description: String,
     val booksCount: Int,
-    val iconName: String = "ic_shelf_books" // Default icon
+    val iconName: String = "ic_shelf_books"
 ) : Parcelable
